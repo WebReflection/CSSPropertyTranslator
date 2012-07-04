@@ -8,6 +8,19 @@ function CSSPropertyTranslator(property, value, re, parse, bind) {
   };
   value = "" + value;
   switch(property) {
+    case 'border-radius':
+      re = /(?:(?:\d+(?:\.\d+)?)(?:px|r?em)\s*)+/;
+      parse = {parse:function (prefix, match) {
+        return prefix + ":" + match;
+      }};
+      return "/* webkit */\n" + [
+        value.replace(re, bind.call(function (match) {
+          return this.parse("-webkit-border-radius", match);
+        }, parse)),
+        value.replace(re, bind.call(function (match) {
+          return this.parse("border-radius", match);
+        }, parse))
+      ].join(";\n") + ";";
     case 'min-device-pixel-ratio':
       re = /\d*(?:\.\d*)/;
       parse = {parse:function (vendor, value) {

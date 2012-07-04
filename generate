@@ -1,3 +1,4 @@
+#!/usr/local/bin/node
 function beautify(fn, spaces, inject) {
   spaces = ("" + fn).replace(/\r\n|\n\r|\r|\n/g, "\n" + spaces);
   return inject ? spaces.replace(/this\.(.+)/g, "$1") : spaces;
@@ -21,7 +22,9 @@ function generate(type) {
       break;
   }
   fs.readdirSync(dir).forEach(function (file) {
-    file = path.join(dir, file.slice(0, -3));
+    file = path.join(dir, file);
+    if (file.slice(-3) != ".js" || file.slice(0, 1) == ".") return;
+    file = file.slice(0, -3);
     module = require(file);
     Object.keys(module).forEach(function (key) {
       test.push({
@@ -80,4 +83,5 @@ var
 ;
 
 global.assert = wru.assert;
+global.log = wru.log;
 generate("js");
