@@ -8,6 +8,7 @@ function generate(type) {
   switch(type) {
     case "js":
       output[type].push(
+        "if (typeof __dirname != \"undefined\") this.parse = CSSPropertyTranslator;",
         "function CSSPropertyTranslator(property, value, re, parse, bind) {",
         "  // " + license,
         "  bind = CSSPropertyTranslator.bind || function (o) {",

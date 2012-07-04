@@ -1,3 +1,4 @@
+if (typeof __dirname != "undefined") this.parse = CSSPropertyTranslator;
 function CSSPropertyTranslator(property, value, re, parse, bind) {
   // @license WTFPL - http://en.wikipedia.org/wiki/WTFPL
   bind = CSSPropertyTranslator.bind || function (o) {

@@ -1,0 +1,8 @@
+#!/usr/local/bin/node
+var 
+  path = require("path"),
+  CSSPropertyTranslator = require(path.join(__dirname, "build",
+  "CSSPropertyTranslator")).parse,
+  arguments = process.argv.splice(2)
+;
+console.log(CSSPropertyTranslator.apply(null, arguments));
