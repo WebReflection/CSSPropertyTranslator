@@ -76,7 +76,7 @@ var
   license = "@license WTFPL - http://en.wikipedia.org/wiki/WTFPL",
   path = require("path"),
   fs = require("fs"),
-  wru = require(path.join(__dirname, "wru")),
+  wru = require(path.join(__dirname, "wru", "wru")),
   dir = path.join(__dirname, "property"),
   test = [],
   output = {},
