@@ -26,7 +26,7 @@ function CSSPropertyTranslator(property, value, re, parse, bind) {
           return multiply == 1 ? value : (divisor * value) + "/" + divisor;
         }
       }};
-      return [
+      return "/* webkit, moz, o */\n" + [
         value.replace(re, bind.call(function (wholeMatch) {
           return "-webkit-min-device-pixel-ratio:" +
                  wholeMatch
@@ -63,4 +63,5 @@ function CSSPropertyTranslator(property, value, re, parse, bind) {
         }, parse))
       ].join(";\n") + ";";
   }
+  return property + ":" + value + ";";
 }

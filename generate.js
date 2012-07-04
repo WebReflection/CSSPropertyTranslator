@@ -38,7 +38,7 @@ function generate(type) {
             "    case '" + key + "':",
             "      re = " + module[key]["*"] + ";",
             "      parse = {parse:" + beautify(module[key]["parse"] || "null", "    ") + "};",
-            "      return [",
+            "      return \"/* " + vendors.slice(0, -1).join(", ") + " */\\n\" + [",
             "        " + vendors.map(function (key) {
               return "value.replace(re, bind.call(" + beautify(this[key], "      ") + ", parse))";
             }, module[key]).join(",\n        "),
@@ -52,6 +52,8 @@ function generate(type) {
     case "js":
       output[type].push(
         "  }",
+        // by default, if no case is found, property:value; is returned instead
+        "  return property + \":\" + value + \";\";",
         "}"
       );
       break;
