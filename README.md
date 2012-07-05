@@ -19,6 +19,13 @@ folder and use one ofthese commands to generate the build and test
 
     // test directly returned values
     node translate min-device-pixel-ratio 1.5
+    
+    // test through the function via JS
+    alert(CSSPropertyTranslator("min-device-pixel-ratio", 1.5));
+
+    // test through node.js
+    var CSSPT = require("./build/CSSPropertyTranslator").parse;
+    CSSPT("min-device-pixel-ratio", 1.5);
 
     // generated output
     /* webkit, moz, o */
@@ -68,6 +75,12 @@ tests in place able to demonstrate some valid use case.
 I will try to keep this project updated as much as possible but since
 variations of new and old CSS are many I need other web developers to help me
 maintaing such tool. Thanks!
+
+TODO
+----
+npm publish in order to provide an easy way to include this project in another
+one plus all possible CSS properties that need to be transformed as files with
+tests.
 
 License
 -------
