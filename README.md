@@ -10,7 +10,7 @@ and produce an output compatible with as many browsers as possible.
 
 How
 ---
-You can simply fork or closne the project locally, create a *property-name.js*
+You can simply fork or clone the project locally, create a *property-name.js*
 file inside the [property](https://github.com/WebReflection/CSSPropertyTranslator/tree/master/property)
 folder and use one ofthese commands to generate the build and test
 
