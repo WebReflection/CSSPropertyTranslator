@@ -1,3 +1,14 @@
+// i.e.
+// CSSPropertyTranslator(
+//   "min-device-pixel-ratio",
+//   1.5
+// ); // will return a string such
+// /* webkit, moz, o */
+// -webkit-min-device-pixel-ratio:1.5;\n
+// min--moz-device-pixel-ratio:1.5;\n
+// -o-min-device-pixel-ratio:3/2;\n
+// min-device-pixel-ratio: 1.5;
+
 // this file will be compiled, translated
 // and optimized after each push/build
 // the property to export, as a node.js module,
@@ -5,33 +16,16 @@
 this["min-device-pixel-ratio"] = {
 
   // the star property is used as matching regular expression
-  // i.e.
-  // CSSPropertyTranslator(
-  //   "min-device-pixel-ratio",
-  //   1.5
-  // ); // will return a string such
-  // -webkit-min-device-pixel-ratio:1.5;\n
-  // min--moz-device-pixel-ratio:1.5;\n
-  // -o-min-device-pixel-ratio:3/2;\n
-  // min-device-pixel-ratio: 1.5;
   "*": /\d*(?:\.\d*)/,
 
-  // the *optional* parse function accepts a vendor and a string
-  // it is useful to create different implementations
-  // of the same CSS property and it should return a string value
-  // parse(vendor, value) is meant to be a bottleneck for browsers
-  // that do not follow same conventions used by others
-  // this bottleneck will be felt only if translated prefixes
-  // are performed runtime and not if pre-compiled
-  // I'd like to let browsers vendors feel the pain
-  // on daily web surfing due their choice
-  // over common properties values
+  // the *optional* parse function
+  // is useful to create different implementations
+  // of the same CSS property
   "parse": function (vendor, value) {
-    // might be common use case
-    // vendor SHOULD be one of these:
-    // "webkit", "moz", "o"
     if (vendor == "o") {
       // this case, opera only
+      // a stupid way to transform
+      // 1.5 into 3/2
       var
         splitted = value.split("."),
         multiply = Math.pow(10, (splitted[1] || "").length),

@@ -10,7 +10,7 @@ function CSSPropertyTranslator(property, value, re, parse, bind) {
   value = "" + value;
   switch(property) {
     case 'border-radius':
-      re = /(?:(?:\d+(?:\.\d+)?)(?:px|r?em)\s*)+/;
+      re = /^.+$/;
       parse = {parse:function (prefix, match) {
         return prefix + ":" + match;
       }};
@@ -25,11 +25,10 @@ function CSSPropertyTranslator(property, value, re, parse, bind) {
     case 'min-device-pixel-ratio':
       re = /\d*(?:\.\d*)/;
       parse = {parse:function (vendor, value) {
-        // might be common use case
-        // vendor SHOULD be one of these:
-        // "webkit", "moz", "o"
         if (vendor == "o") {
           // this case, opera only
+          // a stupid way to transform
+          // 1.5 into 3/2
           var
             splitted = value.split("."),
             multiply = Math.pow(10, (splitted[1] || "").length),

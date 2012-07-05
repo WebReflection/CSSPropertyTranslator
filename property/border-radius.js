@@ -1,5 +1,10 @@
 this["border-radius"] = {
-  "*": /(?:(?:\d+(?:\.\d+)?)(?:px|r?em)\s*)+/,
+  // could be used to validate too
+  // "*": /(?:(?:\d+(?:\.\d+)?)(?:px|r?em)\s*)+/,
+  // orit could be used to quick get everything
+  "*": /^.+$/,
+  // parse can be simply an helper
+  // shared across cases
   parse: function (prefix, match) {
     return prefix + ":" + match;
   },
